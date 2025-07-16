@@ -1,7 +1,5 @@
 # Hecto AI Challenge
 
-GitHub: https://github.com
-
 ![Screenshot 2025-07-15 at 2.12.43 PM.png](Hecto%20AI%20Challenge%2023164e9daeb781979a34c4e7077cdd4f/Screenshot_2025-07-15_at_2.12.43_PM.png)
 
 ![Screenshot 2025-07-15 at 2.12.53 PM.png](Hecto%20AI%20Challenge%2023164e9daeb781979a34c4e7077cdd4f/Screenshot_2025-07-15_at_2.12.53_PM.png)
@@ -65,7 +63,7 @@ After applying YOLO
 ### **Data Augmentation**
 
 ```python
-# To improve generalization and robustness, we applied a mixed augmentation strategy using the Albumentations library. 
+# To improve generalization and robustness, we applied a mixed augmentation strategy using the Albumentations library.
 
 train_transform = A.OneOf([
     A.Compose([
@@ -74,13 +72,13 @@ train_transform = A.OneOf([
                     std=(0.229, 0.224, 0.225)),
         ToTensorV2()], p=1.0),
     A.Compose([
-        A.SomeOf([  
+        A.SomeOf([
             A.Lambda(image=random_half_crop_horizontal, p=1.0),
             A.Lambda(image=random_half_crop_vertical, p=1.0),
             A.RandomBrightnessContrast(brightness_limit=0.2, contrast_limit=0.2, p=1.0),
             A.VerticalFlip(p=1.0),
             A.HorizontalFlip(p=1.0),
-        ], n=2, replace=False), 
+        ], n=2, replace=False),
         A.Resize(height=CFG['IMG_SIZE'], width=CFG['IMG_SIZE']),
         A.Normalize(mean=(0.485, 0.456, 0.406),
                     std=(0.229, 0.224, 0.225)),
